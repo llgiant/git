@@ -11,7 +11,7 @@ type Params = {
     }
 }
 
-export async function generateMetadataa({ params: { userId } }: Params): Promise<Metadata> {
+export async function generateMetadata({ params: { userId } }: Params): Promise<Metadata> {
     const userData: Promise<User> = getUser(userId)
     const user: User = await userData
 
