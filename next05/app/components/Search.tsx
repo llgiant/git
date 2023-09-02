@@ -2,11 +2,8 @@
 import { FormEvent, useState } from 'react'
 import { useRouter } from 'next/navigation'
 
-
-import React from 'react'
-
 export default async function Search() {
-    const [search, setSearch] = useState()
+    const [search, setSearch] = useState('')
     const router = useRouter()
 
     const handleSubmit = (e: FormEvent<HTMLFormElement>) => {
