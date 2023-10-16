@@ -1,8 +1,10 @@
 import Navbar from './components/Navbar'
 import './globals.css'
 import MyProfilePic from './components/MyProfilePic'
+import type { Metadata } from 'next'
 
-export const metadata = {
+
+export const metadata : Metadata = {
   title: "My Blog",
   description: 'Created by llgiant',
 }

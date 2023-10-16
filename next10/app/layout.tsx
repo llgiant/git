@@ -1,6 +1,5 @@
 import Navbar from './components/Navbar'
 import './globals.css'
-import MyProfilePic from './components/MyProfilePic'
 
 export const metadata = {
   title: "My Blog",
@@ -16,8 +15,9 @@ export default function RootLayout({
     <html lang="en">
       <body className="dark:bg-slate-800">
         <Navbar />
-        <MyProfilePic />
+        <main className="px-6 prose prose-xl prose-slate dark:prose-invert mx-auto">
         {children}
+        </main>
       </body>
     </html>
   )
