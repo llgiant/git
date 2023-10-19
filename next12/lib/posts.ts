@@ -27,18 +27,18 @@ export async function getPostByName(fileName: string): Promise<BlogPost | undefi
         //     Video,
         //     CustomImage,
         // },
-        // options: {
-        //     parseFrontmatter: true,
-        //     mdxOptions: {
-        //         rehypePlugins: [
-        //             rehypeHighlight,
-        //             rehypeSlug,
-        //             [rehypeAutolinkHeadings, {
-        //                 behavior: 'wrap'
-        //             }],
-        //         ],
-        //     },
-        // }
+        options: {
+            parseFrontmatter: true,
+            // mdxOptions: {
+            //     rehypePlugins: [
+            //         rehypeHighlight,
+            //         rehypeSlug,
+            //         [rehypeAutolinkHeadings, {
+            //             behavior: 'wrap'
+            //         }],
+            //     ],
+            // },
+        }
     })
 
     const id = fileName.replace(/\.mdx$/, '')
