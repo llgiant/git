@@ -1,6 +1,4 @@
-import { Inter } from 'next/font/google'
 import Posts from './components/Posts'
-const inter = Inter({ subsets: ['latin'] })
 import MyProfilePic from './components/MyProfilePic'
 
 export const revalidate = 10
