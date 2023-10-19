@@ -2,7 +2,7 @@ import { getPostsMeta } from "@/lib/posts"
 import ListItem from "@/app/components/ListItem"
 import Link from "next/link"
 
-export const revalidate = 86400
+export const revalidate = 10
 
 type Props = {
     params: {
@@ -10,6 +10,7 @@ type Props = {
     }
 }
 
+// comment generateStaticParams out if use revalidate = 0
 export async function generateStaticParams() {
     const posts = await getPostsMeta() //deduped!
 

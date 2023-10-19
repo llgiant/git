@@ -3,6 +3,7 @@ import Posts from './components/Posts'
 const inter = Inter({ subsets: ['latin'] })
 import MyProfilePic from './components/MyProfilePic'
 
+export const revalidate = 10
 
 export default function Home() {
   return (

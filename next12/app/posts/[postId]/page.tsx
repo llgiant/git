@@ -3,7 +3,7 @@ import {getPostsMeta, getPostByName} from "@/lib/posts"
 import {notFound} from "next/navigation"
 import Link from "next/link"
 import 'highlight.js/styles/github-dark.css'
-export const revalidate = 0
+export const revalidate = 10
 
 type Props = {
     params: {
@@ -11,16 +11,16 @@ type Props = {
     }
 }
 
-// comment this out if use revalidate = 0
-// export async function generateStaticParams() {
-//     const posts = await getPostsMeta()
-//
-//     if(!posts) return []
-//
-//     return posts.map((post) => ({
-//         postId: post.id
-//     }))
-// }
+// comment generateStaticParams out if use revalidate = 0
+export async function generateStaticParams() {
+    const posts = await getPostsMeta()
+
+    if(!posts) return []
+
+    return posts.map((post) => ({
+        postId: post.id
+    }))
+}
 
 export async function generateMetadata({params: {postId}}: Props) {
 
