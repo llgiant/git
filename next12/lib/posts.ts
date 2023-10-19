@@ -1,4 +1,4 @@
-import {headers} from "next/headers";
+import {compileMDX} from "next-mdx-remote/rsc";
 
 type Filetree = {
     "tree": [
@@ -6,14 +6,46 @@ type Filetree = {
     ]
 }
 
-export async function getPostByName(fileName: string): Promis<BlogPost | undefined> {
-    const res = await fetch(`https://raw.githubusercontent.com/llgiant/test-blogposts/main/${fileName}`, {
+export async function getPostByName(fileName: string): Promise<BlogPost | undefined> {
+    const res = await fetch(`https://raw.githubusercontent.com/llgiant/test-blogposts/master/${fileName}`, {
         headers: {
             Accept: 'application/vnd.github+json',
             Authorization: `Bearer ${process.env.GITHUB_TOKEN}`,
             'X_GitHub-Api_Version': '2022-11-28',
         }
     })
+
+    if (!res.ok) return undefined
+
+    const rawMDX = await res.text()
+
+    if (rawMDX === '404: Not Found') return undefined
+
+    const { frontmatter, content } = await compileMDX<{ title: string, date: string, tags: string[] }>({
+        source: rawMDX,
+        // components: {
+        //     Video,
+        //     CustomImage,
+        // },
+        // options: {
+        //     parseFrontmatter: true,
+        //     mdxOptions: {
+        //         rehypePlugins: [
+        //             rehypeHighlight,
+        //             rehypeSlug,
+        //             [rehypeAutolinkHeadings, {
+        //                 behavior: 'wrap'
+        //             }],
+        //         ],
+        //     },
+        // }
+    })
+
+    const id = fileName.replace(/\.mdx$/, '')
+
+    const blogPostObj: BlogPost = { meta: { id, title: frontmatter.title, date: frontmatter.date, tags: frontmatter.tags }, content }
+
+    return blogPostObj
 }
 
 export async function getPostsMeta(): Promise<Meta[] | undefined> {
